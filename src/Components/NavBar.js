@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import {IconButton} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
-import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {Teams} from "../Pages/Teams";
@@ -97,7 +97,7 @@ export const NavBar = withStyles(styles)(({classes}) => (
                 path="/teams"
                 render={() => (
                     <Fragment>
-                        <TeamsToolbar title="Teams"/>
+                        <TeamsToolbar title="Managing Teams"/>
                         <Teams/>
                     </Fragment>
                 )}
@@ -105,7 +105,7 @@ export const NavBar = withStyles(styles)(({classes}) => (
             <Route
                 path="/players"
             >
-                <TeamsToolbar title="Players"/>
+                <TeamsToolbar title="Managing Players"/>
                 <Players/>
             </Route>
         </div>
