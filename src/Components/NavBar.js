@@ -104,10 +104,13 @@ export const NavBar = withStyles(styles)(({classes}) => (
             />
             <Route
                 path="/players"
-            >
-                <TeamsToolbar title="Managing Players"/>
-                <Players/>
-            </Route>
+                render={() => (
+                    <Fragment>
+                        <TeamsToolbar title="Managing Players"/>
+                        <Players/>
+                    </Fragment>
+                )}
+            />
         </div>
     </Router>
 ));

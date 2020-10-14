@@ -1,70 +1,26 @@
-import React, {Fragment, useState} from 'react';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import GroupIcon from '@material-ui/icons/Group';
-import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Icon from "@material-ui/core/Icon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
+import React from 'react';
+import {TeamList} from "../Components/TeamList";
+import {withStyles} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import {Team} from "../Components/Team";
 
-const ExpandIcon = ({expanded}) =>
-    expanded ? <ExpandLessIcon/> : <ExpandMoreIcon/>;
-
-export const Teams = () => {
-    const [items, setItems] = useState([
-        {
-            name: 'JO12-1',
-            Icon: GroupIcon,
-            description: 'Selectie team',
-            expanded: false,
-            children: [
-                {name: 'Roxann Jagtenberg', Icon: DirectionsRunIcon},
-                {name: 'Jimmie Sundert', Icon: DirectionsRunIcon}
-            ]
-        }, {
-            name: 'JO15-2',
-            Icon: GroupIcon,
-            expanded: false,
-            children: [
-                {name: 'Henry Hakkens', Icon: DirectionsRunIcon},
-                {name: 'Oka Eerden', Icon: DirectionsRunIcon}
-            ]
-        }
-    ]);
-
-    const onClick = index => () => {
-        const item = items[index];
-        const newItems = [...items];
-        newItems[index] = { ...item, expanded: !item.expanded}
-        setItems(newItems);
+const styles = theme => ({
+    root: {
+        flexGrow: 1
     }
+})
 
+export const Teams = withStyles(styles)(({classes}) => {
     return (
-        <List>
-            {items.map(({ Icon, ...item }, index) => (
-                <Fragment key={index}>
-                    <ListItem button onClick={onClick(index)}>
-                        <ListItemIcon>
-                            <Icon/>
-                        </ListItemIcon>
-                        <ListItemText primary={item.name}/>
-                        <ExpandIcon expanded={item.expanded}/>
-                    </ListItem>
-                    <Collapse in={item.expanded}>
-                        {item.children.map(child => (
-                            <ListItem key={child.name} button dense>
-                                <ListItemIcon>
-                                    <child.Icon/>
-                                </ListItemIcon>
-                                <ListItemText primary={child.name}/>
-                            </ListItem>
-                        ))}
-                    </Collapse>
-                </Fragment>
-            ))}
-        </List>
+        <div className={classes.root}>
+            <Grid container spacing={4}>
+                <Grid item xs={12} sm={4} md={3}>
+                    <TeamList/>
+                </Grid>
+                <Grid item xs={12} sm={8} md={9}>
+                    <Team/>
+                </Grid>
+            </Grid>
+        </div>
     );
-}
+})
