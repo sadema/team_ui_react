@@ -19,40 +19,13 @@ const styles = theme => ({
 const ExpandIcon = ({expanded}) =>
     expanded ? <ExpandLessIcon/> : <ExpandMoreIcon/>;
 
-export const TeamList = withStyles(styles)(({classes}) => {
-    const [items, setItems] = useState([
-        {
-            name: 'JO12-1',
-            Icon: GroupIcon,
-            description: 'Selectie team',
-            expanded: false,
-            children: [
-                {name: 'Roxann Jagtenberg', Icon: DirectionsRunIcon},
-                {name: 'Jimmie Sundert', Icon: DirectionsRunIcon}
-            ]
-        }, {
-            name: 'JO15-2',
-            Icon: GroupIcon,
-            expanded: false,
-            children: [
-                {name: 'Henry Hakkens', Icon: DirectionsRunIcon},
-                {name: 'Oka Eerden', Icon: DirectionsRunIcon}
-            ]
-        }
-    ]);
-
-    const onClick = index => () => {
-        const item = items[index];
-        const newItems = [...items];
-        newItems[index] = {...item, expanded: !item.expanded}
-        setItems(newItems);
-    }
-
+export const TeamList = withStyles(styles)(({classes, ...props}) => {
     return (
         <List>
-            {items.map(({Icon, ...item}, index) => (
+            {props.items.map(({Icon, ...item}, index) => (
                 <Fragment key={index}>
-                    <ListItem button onClick={onClick(index)}>
+                    {console.log(item)}
+                    <ListItem button onClick={props.onClick(index,'TEAM')} key={index}>
                         <ListItemIcon>
                             <Icon/>
                         </ListItemIcon>
@@ -60,8 +33,8 @@ export const TeamList = withStyles(styles)(({classes}) => {
                         <ExpandIcon expanded={item.expanded}/>
                     </ListItem>
                     <Collapse in={item.expanded}>
-                        {item.children.map(child => (
-                            <ListItem key={child.name} button dense>
+                        {item.children.map((child, playerIndex) => (
+                            <ListItem key={child.name} button dense onClick={props.onClick(playerIndex, 'PLAYER')}>
                                 <ListItemIcon>
                                     <child.Icon/>
                                 </ListItemIcon>

@@ -68,7 +68,7 @@ const TeamsToolbar = withStyles(styles)(
                                 <MenuItems/>
                             </Menu>
                             <Typography
-                                variant="title"
+                                variant="h5"
                                 color="inherit"
                                 className={classes.flex}
                             >
